@@ -1,0 +1,19 @@
+---
+- name: Create Oracle User
+  hosts: oracle_db_servers
+  gather_facts: no
+  vars:
+    oracle_home: "/path/to/oracle/home"
+    oracle_sid: "YOUR_ORACLE_SID"
+    oracle_user: "new_user"
+    oracle_password: "new_password"
+  tasks:
+    - name: Create Oracle user
+      oracle_user:
+        oracle_home: "{{ oracle_home }}"
+        oracle_sid: "{{ oracle_sid }}"
+        user: "{{ oracle_user }}"
+        password: "{{ oracle_password }}"
+        state: present
+      become: yes
+      become_user: oracle
